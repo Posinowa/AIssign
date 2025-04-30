@@ -1,7 +1,10 @@
 import 'package:aipm/register_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:aipm/home_screen.dart'; // Make sure to import the home screen
+import 'package:firebase_core/firebase_core.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -13,7 +16,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  late String username;
+  late String email;
   late String password;
 
   @override
@@ -42,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
                   return null;
                 },
                 onSaved: (value) {
-                  username = value!;
+                  email = value!;
                 },
               ),
               const SizedBox(height: 10.0),
@@ -86,12 +89,11 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 10.0),
               ElevatedButton(
-                // ignore: sort_child_properties_last
-                child: const Text("Giriş Yap"),
+                child: const Text("Giriş yap"),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
-                    debugPrint("username: $username, password: $password");
+                    debugPrint("username: $email, password: $password");
                   } else {
                     showDialog(
                         context: context,
@@ -106,6 +108,20 @@ class _LoginPageState extends State<LoginPage> {
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(double.infinity, 50),
                 ),
+              ),
+              SizedBox(height: 0),
+              ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(double.infinity, 50),
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.black,
+                ),
+                onPressed: () {},
+                icon: const FaIcon(
+                  FontAwesomeIcons.google,
+                  color: Colors.blue,
+                ),
+                label: const Text("Google ile giriş yap"),
               ),
             ],
           ),
