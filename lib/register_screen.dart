@@ -1,3 +1,6 @@
+
+import 'package:aipm/home_screen.dart';
+import 'package:aipm/main.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -122,11 +125,11 @@ class HomePage extends StatelessWidget {
                               email: email,
                               password: password,
                             );
-                            // Kayıt başarılı, MainApp sayfasına yönlendir
+
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const MainApp()),
+                                  builder: (context) => const HomeScreen()),
                             );
                           } on FirebaseAuthException catch (e) {
                             // Hata durumunda
@@ -159,19 +162,6 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text('Welcome to MainApp!'),
       ),
     );
   }
